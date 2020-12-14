@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[34,)"
+license = "All Rights Reserved"
+[[mods]]
+modId="out_of_sight"
+version="${file.jarVersion}"
+displayName="Out of Sight"
+authors="Corosus"
+description='''
+Helps improve frame rates by limiting how far away tile entities and entities can render, with configurable ranges.
+'''
+
+[[dependencies.moveplus]]
+    modId="forge"
+    mandatory=true
+    versionRange="[34,)"
+    ordering="NONE"
+    side="CLIENT"
+[[dependencies.moveplus]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.3]"
+    ordering="NONE"
+    side="CLIENT"
