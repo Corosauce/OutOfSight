@@ -16,7 +16,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.16.4-1.0.0'
+version = '1.16.4-1.0.1'
 group = 'com.corosus.out_of_sight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'out_of_sight'
 
