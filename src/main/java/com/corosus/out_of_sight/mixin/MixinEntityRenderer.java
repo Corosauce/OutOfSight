@@ -4,31 +4,26 @@ import com.corosus.out_of_sight.OutOfSight;
 import com.corosus.out_of_sight.config.Config;
 import net.minecraft.client.renderer.culling.ClippingHelper;
 import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.AxisAlignedBB;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(EntityRenderer.class)
-public abstract class MixinEntityRenderer<T extends Entity> {
+@Mixin(EntityRendererManager.class)
+public abstract class MixinEntityRenderer {
 
-    @Overwrite
-    public boolean shouldRender(T livingEntityIn, ClippingHelper camera, double camX, double camY, double camZ) {
+    @Redirect(method = "shouldRender",
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;shouldRender(Lnet/minecraft/entity/Entity;Lnet/minecraft/client/renderer/culling/ClippingHelper;DDD)Z"))
+    public <T extends Entity> boolean shouldRender(EntityRenderer<? super T> entityrenderer, T livingEntityIn, ClippingHelper camera, double camX, double camY, double camZ) {
         if (!isInRangeToRender3d(livingEntityIn, camX, camY, camZ)) {
             return false;
-        } else if (livingEntityIn.ignoreFrustumCheck) {
-            return true;
-        } else {
-            AxisAlignedBB axisalignedbb = livingEntityIn.getRenderBoundingBox().grow(0.5D);
-            if (axisalignedbb.hasNaN() || axisalignedbb.getAverageEdgeLength() == 0.0D) {
-                axisalignedbb = new AxisAlignedBB(livingEntityIn.getPosX() - 2.0D, livingEntityIn.getPosY() - 2.0D, livingEntityIn.getPosZ() - 2.0D, livingEntityIn.getPosX() + 2.0D, livingEntityIn.getPosY() + 2.0D, livingEntityIn.getPosZ() + 2.0D);
-            }
-
-            return camera.isBoundingBoxInFrustum(axisalignedbb);
         }
+        return entityrenderer.shouldRender(livingEntityIn, camera, camX, camY, camZ);
     }
 
-    public boolean isInRangeToRender3d(T livingEntityIn, double x, double y, double z) {
+    public <T extends Entity> boolean isInRangeToRender3d(T livingEntityIn, double x, double y, double z) {
         double d0 = livingEntityIn.getPosX() - x;
         double d1 = livingEntityIn.getPosY() - y;
         double d2 = livingEntityIn.getPosZ() - z;
@@ -38,6 +33,6 @@ public abstract class MixinEntityRenderer<T extends Entity> {
                 return false;
             }
         }
-        return livingEntityIn.isInRangeToRenderDist(d3);
+        return true;
     }
 }
