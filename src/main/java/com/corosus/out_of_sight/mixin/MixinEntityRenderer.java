@@ -2,7 +2,7 @@ package com.corosus.out_of_sight.mixin;
 
 import com.corosus.out_of_sight.OutOfSight;
 import com.corosus.out_of_sight.config.Config;
-import net.minecraft.client.renderer.culling.ClippingHelper;
+import net.minecraft.client.renderer.culling.ClippingHelperImpl;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.Entity;
@@ -15,8 +15,8 @@ public abstract class MixinEntityRenderer {
 
     @Redirect(method = "shouldRender",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;shouldRender(Lnet/minecraft/entity/Entity;Lnet/minecraft/client/renderer/culling/ClippingHelper;DDD)Z"))
-    public <T extends Entity> boolean shouldRender(EntityRenderer<? super T> entityrenderer, T livingEntityIn, ClippingHelper camera, double camX, double camY, double camZ) {
+                    target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;shouldRender(Lnet/minecraft/entity/Entity;Lnet/minecraft/client/renderer/culling/ClippingHelperImpl;DDD)Z"))
+    public <T extends Entity> boolean shouldRender(EntityRenderer<? super T> entityrenderer, T livingEntityIn, ClippingHelperImpl camera, double camX, double camY, double camZ) {
         if (!isInRangeToRender3d(livingEntityIn, camX, camY, camZ)) {
             return false;
         }
