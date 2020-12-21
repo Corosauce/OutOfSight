@@ -9,3 +9,10 @@ authors="Corosus"
 description='''
 Helps improve frame rates by limiting how far away tile entities and entities can render, with configurable ranges.
 '''
+
+[[dependencies.out_of_sight]]
+    modId="forge"
+    mandatory=true
+    versionRange="[31.2.44,)"
+    ordering="NONE"
+    side="CLIENT"
