@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[25,)" #mandatory (24 is current forge version)
+loaderVersion="[28,)" #mandatory (24 is current forge version)
 license = "All Rights Reserved"
 [[mods]]
 modId="out_of_sight"
@@ -13,6 +13,6 @@ Helps improve frame rates by limiting how far away tile entities and entities ca
 [[dependencies.out_of_sight]]
     modId="forge"
     mandatory=true
-    versionRange="[31.2.44,)"
+    versionRange="[28,)"
     ordering="NONE"
     side="CLIENT"
