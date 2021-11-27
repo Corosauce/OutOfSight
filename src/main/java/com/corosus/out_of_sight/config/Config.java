@@ -5,6 +5,10 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 import static net.minecraftforge.common.ForgeConfigSpec.*;
 
+import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.common.ForgeConfigSpec.Builder;
+import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
+
 @EventBusSubscriber
 public class Config {
 
@@ -24,16 +28,16 @@ public class Config {
             CLIENT_BUILDER.comment("General mod settings").push("general");
 
             tileEntityRenderRangeMax = CLIENT_BUILDER
-                    .defineInRange("tileEntityRenderRangeMax", 24, 1D, 30000);
+                    .defineInRange("tileEntityRenderRangeMax", 16, 1D, 30000);
 
             entityRenderRangeMax = CLIENT_BUILDER
-                    .defineInRange("entityRenderRangeMax", 64, 1D, 30000);
+                    .defineInRange("entityRenderRangeMax", 16, 1D, 30000);
 
             tileEntityRenderLimitModdedOnly = CLIENT_BUILDER
-                    .define("tileEntityRenderLimitModdedOnly", true);
+                    .define("tileEntityRenderLimitModdedOnly", false);
 
             entityRenderLimitModdedOnly = CLIENT_BUILDER
-                    .define("entityRenderLimitModdedOnly", true);
+                    .define("entityRenderLimitModdedOnly", false);
 
             CLIENT_BUILDER.pop();
         }
