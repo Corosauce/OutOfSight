@@ -28,16 +28,16 @@ public class Config {
             CLIENT_BUILDER.comment("General mod settings").push("general");
 
             tileEntityRenderRangeMax = CLIENT_BUILDER
-                    .defineInRange("tileEntityRenderRangeMax", 16, 1D, 30000);
+                    .defineInRange("tileEntityRenderRangeMax", 24, 1D, 30000);
 
             entityRenderRangeMax = CLIENT_BUILDER
-                    .defineInRange("entityRenderRangeMax", 16, 1D, 30000);
+                    .defineInRange("entityRenderRangeMax", 64, 1D, 30000);
 
             tileEntityRenderLimitModdedOnly = CLIENT_BUILDER
-                    .define("tileEntityRenderLimitModdedOnly", false);
+                    .define("tileEntityRenderLimitModdedOnly", true);
 
             entityRenderLimitModdedOnly = CLIENT_BUILDER
-                    .define("entityRenderLimitModdedOnly", false);
+                    .define("entityRenderLimitModdedOnly", true);
 
             CLIENT_BUILDER.pop();
         }
