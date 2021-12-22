@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "com.corosus.out_of_sight.mixin",
-  "compatibilityLevel": "JAVA_16",
+  "compatibilityLevel": "JAVA_17",
   "refmap": "out_of_sight.refmap.json",
   "client": ["MixinTileEntityRendererDispatcher",
     "MixinEntityRenderer"],
