@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "out_of_sight.refmap.json",
   "client": ["MixinTileEntityRendererDispatcher",
+    "MixinBlockEntityViewDistance",
     "MixinEntityRenderer"],
   "injectors": {
     "defaultRequire": 1
