@@ -23,8 +23,11 @@ public interface MixinBlockEntityViewDistance<T extends BlockEntity> {
      */
     @Overwrite
     default int getViewDistance() {
-        if (!OutOfSight.getCanonicalNameCached(this.getClass()).startsWith("net.minecraft")) {
-            return Config.GENERAL.tileEntityRenderRangeMax.get().intValue();
+        if (Config.GENERAL.entityRenderLimit.get() || !OutOfSight.getCanonicalNameCached(this.getClass()).startsWith("net.minecraft")) {
+            var hor = Config.GENERAL.tileEntityRenderHor.get().intValue();
+            var ver = Config.GENERAL.tileEntityRenderHor.get().intValue();
+            var gap = (int)Math.max(1,Math.ceil(Math.sqrt(hor * hor + ver * ver)));
+            return gap;
         } else {
             return 64;
         }

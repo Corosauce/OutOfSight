@@ -18,26 +18,30 @@ public class Config {
 
     public static final class CategoryGeneral {
 
-        public final DoubleValue tileEntityRenderRangeMax;
-        public final DoubleValue entityRenderRangeMax;
+        public final BooleanValue entityRenderLimit;
+        public final DoubleValue entityRenderHor;
+        public final DoubleValue entityRenderVer;
 
-        public final BooleanValue tileEntityRenderLimitModdedOnly;
-        public final BooleanValue entityRenderLimitModdedOnly;
+        public final BooleanValue tileEntityRenderLimit;
+        public final DoubleValue tileEntityRenderHor;
+        public final DoubleValue tileEntityRenderVer;
 
         private CategoryGeneral() {
             CLIENT_BUILDER.comment("General mod settings").push("general");
 
-            tileEntityRenderRangeMax = CLIENT_BUILDER
-                    .defineInRange("tileEntityRenderRangeMax", 24, 1D, 30000);
+            entityRenderLimit = CLIENT_BUILDER
+                    .define("entityRenderLimit", true);
+            entityRenderHor = CLIENT_BUILDER
+                    .defineInRange("entityRenderHor", 128, 1D, 30000);
+            entityRenderVer = CLIENT_BUILDER
+                    .defineInRange("entityRenderVer", 24, 1D, 30000);
 
-            entityRenderRangeMax = CLIENT_BUILDER
-                    .defineInRange("entityRenderRangeMax", 64, 1D, 30000);
-
-            tileEntityRenderLimitModdedOnly = CLIENT_BUILDER
-                    .define("tileEntityRenderLimitModdedOnly", true);
-
-            entityRenderLimitModdedOnly = CLIENT_BUILDER
-                    .define("entityRenderLimitModdedOnly", true);
+            tileEntityRenderLimit = CLIENT_BUILDER
+                    .define("tileEntityRenderLimit", true);
+            tileEntityRenderHor = CLIENT_BUILDER
+                    .defineInRange("tileEntityRenderHor", 128, 1D, 30000);
+            tileEntityRenderVer = CLIENT_BUILDER
+                    .defineInRange("tileEntityRenderVer", 24, 1D, 30000);
 
             CLIENT_BUILDER.pop();
         }

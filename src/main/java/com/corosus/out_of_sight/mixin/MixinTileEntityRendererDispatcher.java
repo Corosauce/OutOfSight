@@ -18,19 +18,19 @@ public abstract class MixinTileEntityRendererDispatcher {
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher;render(Lnet/minecraft/world/level/block/entity/BlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;)V"))
     public <E extends BlockEntity> void renderTileEntity(BlockEntityRenderDispatcher dispatcher, E tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn) {
-        double dist = getDistanceSq(tileEntityIn, dispatcher.camera.getPosition().x, dispatcher.camera.getPosition().y, dispatcher.camera.getPosition().z);
-        if (dist > Config.GENERAL.tileEntityRenderRangeMax.get() * Config.GENERAL.tileEntityRenderRangeMax.get()) {
-            if (!Config.GENERAL.tileEntityRenderLimitModdedOnly.get() || !OutOfSight.getCanonicalNameCached(tileEntityIn.getClass()).startsWith("net.minecraft")) {
-                return;
-            }
+        if(Config.GENERAL.tileEntityRenderLimit.get()){
+            double hor = Config.GENERAL.tileEntityRenderHor.get();
+            double ver = Config.GENERAL.tileEntityRenderVer.get();
+            var entity = tileEntityIn;
+            var x = dispatcher.camera.getPosition().x;
+            var y = dispatcher.camera.getPosition().y;
+            var z = dispatcher.camera.getPosition().z;
+            var qx = (double)entity.getBlockPos().getX() + 0.5D - x;
+            var qy = (double)entity.getBlockPos().getY() + 0.5D - y;
+            var qz = (double)entity.getBlockPos().getZ() + 0.5D - z;
+            double gap = qx * qx / hor / hor + qy * qy / ver / ver + qz * qz / hor / hor;
+            if(gap>1 || !OutOfSight.getCanonicalNameCached(entity.getClass()).startsWith("net.minecraft")) return;
         }
         dispatcher.render(tileEntityIn, partialTicks, matrixStackIn, bufferIn);
-    }
-
-    public double getDistanceSq(BlockEntity tileEntity, double x, double y, double z) {
-        double d0 = (double)tileEntity.getBlockPos().getX() + 0.5D - x;
-        double d1 = (double)tileEntity.getBlockPos().getY() + 0.5D - y;
-        double d2 = (double)tileEntity.getBlockPos().getZ() + 0.5D - z;
-        return d0 * d0 + d1 * d1 + d2 * d2;
     }
 }

@@ -24,14 +24,15 @@ public abstract class MixinEntityRenderer {
     }
 
     public <T extends Entity> boolean isInRangeToRender3d(T livingEntityIn, double x, double y, double z) {
-        double d0 = livingEntityIn.getX() - x;
-        double d1 = livingEntityIn.getY() - y;
-        double d2 = livingEntityIn.getZ() - z;
-        double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-        if (d3 > Config.GENERAL.entityRenderRangeMax.get() * Config.GENERAL.entityRenderRangeMax.get()) {
-            if (!Config.GENERAL.entityRenderLimitModdedOnly.get() || !OutOfSight.getCanonicalNameCached(livingEntityIn.getClass()).startsWith("net.minecraft")) {
-                return false;
-            }
+        if(Config.GENERAL.entityRenderLimit.get()){
+            double hor = Config.GENERAL.entityRenderHor.get();
+            double ver = Config.GENERAL.entityRenderVer.get();
+            var entity = livingEntityIn;
+            var qx = entity.getX() - x;
+            var qy = entity.getY() - y;
+            var qz = entity.getZ() - z;
+            double gap = qx * qx / hor / hor + qy * qy / ver / ver + qz * qz / hor / hor;
+            if(gap>1 || !OutOfSight.getCanonicalNameCached(livingEntityIn.getClass()).startsWith("net.minecraft")) return false;
         }
         return true;
     }
