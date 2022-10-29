@@ -2,7 +2,7 @@ package com.corosus.out_of_sight;
 
 import com.corosus.out_of_sight.command.CommandReloadConfig;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientChatEvent;
@@ -22,7 +22,7 @@ public class EventHandlerForge {
         String msg = event.getMessage();
 
         if (msg.equals("/" + CommandReloadConfig.getCommandName() + " client")) {
-            Minecraft.getInstance().gui.getChat().addMessage(new TextComponent("reloading all mods client configurations"));
+//            Minecraft.getInstance().gui.getChat().addMessage(new TextComponent("reloading all mods client configurations"));
             ConfigTracker.INSTANCE.loadConfigs(ModConfig.Type.CLIENT, FMLPaths.CONFIGDIR.get());
         }
     }
