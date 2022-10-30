@@ -5,7 +5,8 @@
   "refmap": "out_of_sight.refmap.json",
   "client": ["MixinTileEntityRendererDispatcher",
     "MixinBlockEntityViewDistance",
-    "MixinEntityRenderer"],
+    "MixinEntityRenderer",
+    "MixinLevelRenderer"],
   "injectors": {
     "defaultRequire": 1
   },
