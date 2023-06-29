@@ -43,7 +43,11 @@ public class OutOfSight
 
     public static String getCanonicalNameCached(Class clazz) {
         if (!cacheClassToCanonicalName.containsKey(clazz)) {
-            cacheClassToCanonicalName.put(clazz, clazz.getCanonicalName());
+            String canonicalName = clazz.getCanonicalName();
+            if (canonicalName == null) {
+                canonicalName = "";
+            }
+            cacheClassToCanonicalName.put(clazz, canonicalName);
         }
         return cacheClassToCanonicalName.get(clazz);
     }
