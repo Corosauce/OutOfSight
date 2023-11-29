@@ -11,6 +11,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 
 
@@ -41,6 +42,7 @@ public class OutOfSight
 
     }
 
+    @Nullable
     public static String getCanonicalNameCached(Class clazz) {
         if (!cacheClassToCanonicalName.containsKey(clazz)) {
             cacheClassToCanonicalName.put(clazz, clazz.getCanonicalName());

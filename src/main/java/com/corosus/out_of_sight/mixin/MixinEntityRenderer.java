@@ -29,7 +29,11 @@ public abstract class MixinEntityRenderer {
         double d2 = livingEntityIn.getZ() - z;
         double d3 = d0 * d0 + d1 * d1 + d2 * d2;
         if (d3 > Config.GENERAL.entityRenderRangeMax.get() * Config.GENERAL.entityRenderRangeMax.get()) {
-            if (!Config.GENERAL.entityRenderLimitModdedOnly.get() || !OutOfSight.getCanonicalNameCached(livingEntityIn.getClass()).startsWith("net.minecraft")) {
+            String clazzName = OutOfSight.getCanonicalNameCached(livingEntityIn.getClass());
+            if (!Config.GENERAL.entityRenderLimitModdedOnly.get()) {
+                return false;
+            }
+            if (clazzName != null && !clazzName.startsWith("net.minecraft")) {
                 return false;
             }
         }

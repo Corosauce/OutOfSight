@@ -23,7 +23,8 @@ public interface MixinBlockEntityViewDistance<T extends BlockEntity> {
      */
     @Overwrite
     default int getViewDistance() {
-        if (!OutOfSight.getCanonicalNameCached(this.getClass()).startsWith("net.minecraft")) {
+        String clazzName = OutOfSight.getCanonicalNameCached(this.getClass());
+        if (clazzName != null && !clazzName.startsWith("net.minecraft")) {
             return Config.GENERAL.tileEntityRenderRangeMax.get().intValue();
         } else {
             return 64;

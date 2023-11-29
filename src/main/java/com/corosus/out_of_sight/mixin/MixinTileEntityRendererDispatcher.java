@@ -20,7 +20,11 @@ public abstract class MixinTileEntityRendererDispatcher {
     public <E extends BlockEntity> void renderTileEntity(BlockEntityRenderDispatcher dispatcher, E tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn) {
         double dist = getDistanceSq(tileEntityIn, dispatcher.camera.getPosition().x, dispatcher.camera.getPosition().y, dispatcher.camera.getPosition().z);
         if (dist > Config.GENERAL.tileEntityRenderRangeMax.get() * Config.GENERAL.tileEntityRenderRangeMax.get()) {
-            if (!Config.GENERAL.tileEntityRenderLimitModdedOnly.get() || !OutOfSight.getCanonicalNameCached(tileEntityIn.getClass()).startsWith("net.minecraft")) {
+            String clazzName = OutOfSight.getCanonicalNameCached(tileEntityIn.getClass());
+            if (!Config.GENERAL.tileEntityRenderLimitModdedOnly.get()) {
+                return;
+            }
+            if (clazzName != null && !clazzName.startsWith("net.minecraft")) {
                 return;
             }
         }
